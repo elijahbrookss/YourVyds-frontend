@@ -1,0 +1,80 @@
+
+.login-page-holder{
+  position: fixed;
+  border-radius: 2em;
+  background: rgba(0, 0, 0, 0.7);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 5em 4em;
+  text-align: center;
+}
+
+.login-page-holder img{
+  width: 10em;
+  height: 10em;
+  margin-bottom: 4em;
+  border-radius: 50%;
+  background-color: rgb(120, 120, 120);
+}
+
+.title {
+  color: rgb(255, 255, 255);
+  margin-top: 0;
+  margin-bottom: 1.2em;
+}
+
+#username{
+  margin-top: -1em;
+  color: rgb(100 ,255 ,100)
+}
+.user-form{
+  margin-bottom: 2em;
+}
+.user-form input{
+  border-radius: 2em;
+  border-style: solid;
+  padding: .4em 1.2em;
+  margin-bottom: 1em;
+  background: rgba(70, 70, 70, .5);
+  color: rgb(255, 255, 255);
+  transition: padding .4s, background .4s, border-color .4s;
+  text-align: center;
+}
+
+.user-form input:focus{
+  padding: .4em 2em;
+  background: rgba(17, 51, 17, .6);
+  border-color: rgba(17, 70, 17, .6);
+}
+
+.go-back{
+  right: 300px;
+  top: 40px;
+  position: absolute;
+  background: rgba(70, 70, 70, .6);
+  color: rgb(255, 255, 255);
+  border-radius: 100em;
+  font-size: 1.2em;
+  border-style: none;
+  transition: padding .4s, background .4s;
+}
+
+.go-back:hover{
+  background: rgba(17, 51, 17, .6);
+}
+
+.user-form button{
+  background: rgba(70, 70, 70, .6);
+  color: rgb(255, 255, 255);
+  margin-top: 1em;
+  border-radius: 2em;
+  padding: .3em 2em;
+  border-style: none;
+  transition: padding .4s, background .4s;
+}
+
+.user-form button:hover{
+  padding: .3em 4em;
+  background: rgba(17, 51, 17, .6);
+}

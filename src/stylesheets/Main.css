@@ -1,0 +1,87 @@
+
+html{
+  /* height: 100vh; */
+  background: url("https://images.freecreatives.com/wp-content/uploads/2016/02/Dark-Gray-Background-for-Free-Download.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-position: center; */
+}
+
+a{
+  text-decoration: none;
+}
+
+*{
+  outline: none;
+}
+
+#sidebar{
+  position: fixed;
+  right: 0;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  z-index: 10;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.sidebar-button{
+  background: rgb(0, 0, 0);
+  color: rgb(150, 150, 150);
+  border-radius: 100em;
+  margin: .6em;
+  font-size: 1.2em;
+  border-style: none;
+
+  padding: .3em .6em;
+  transition: padding .15s;
+}
+
+.sidebar-button:hover{
+  background: rgba(17, 51, 17, .6);
+  padding: .7em 1em;
+}
+
+#logout:hover{
+  background: rgba(51, 0, 0, .6);
+  padding: .7em 1em;
+}
+
+::-webkit-scrollbar-track
+{
+	border-radius: 12px;
+	background-color: rgb(0, 0, 0);
+}
+
+::-webkit-scrollbar
+{
+	width: 7px;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #333;
+}
+
+.delete{
+  font-size: 1.7em;
+  transition: color .3s;
+}
+
+.edit{
+  font-size: 1.7em;
+  transition: color .3s;
+}
+
+.edit:hover{
+  color: rgb(60, 120, 60);
+  cursor: none;
+}
+
+.delete:hover{
+  color: rgb(120, 60, 60);
+  cursor: none;
+}

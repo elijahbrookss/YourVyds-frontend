@@ -1,0 +1,53 @@
+
+
+.bg-img{
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-text{
+  color: rgb(255,255,255);
+  position: relative;
+  top: 50%;
+  text-align: center;
+}
+
+.main-text h1{
+  font-size: 6.5em;
+  transform: translatey(-50%);
+  font-family: 'Dancing Script', cursive;
+
+}
+
+#buttons-holder{
+  transform: translate(0%, -100%);
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  /* flex-flow: column; */
+}
+
+#buttons-holder button {
+  margin-left: 1em;
+  background: rgb(0, 0, 0);
+  color: rgb(150, 150, 150);
+  border-radius: 100em;
+  font-size: 1.2em;
+  border-style: none;
+
+  padding: .3em 4em;
+  transition: background, padding .5s;
+}
+
+#buttons-holder button:hover{
+  padding: .3em 7em;
+  background: rgb(20, 20, 20);
+}
+
+.main-text h5{
+  font-size: 1.6em;
+  color: rgb(100, 100, 100);
+  transform: translatey(-200%);
+  font-family: 'Dancing Script', cursive;
+}

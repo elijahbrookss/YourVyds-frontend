@@ -1,0 +1,140 @@
+
+.video-form {
+  border-radius: 2em;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2em 5em 2em;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  width: 60%;
+  height: 30%;
+  margin: auto;
+  margin-top: 7%;
+  /* transform: translateY(-50%); */
+  /* margin-top: 50%; */
+
+}
+
+.form-content{
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.form-input-fields .field{
+  display: flex;
+  flex-flow: column;
+}
+
+.title-stuff, .file-field+label{
+  width: 100%;
+  text-align: center;
+  border-radius: 2em;
+  border-style: solid;
+  padding: .4em 1.2em;
+  margin-bottom: 1em;
+  background: rgba(70, 70, 70, .5);
+  color: rgb(255, 255, 255);
+  transition: padding .4s, background .4s, border-color .4s;
+  text-align: center;
+  /* margin-top: 1em; */
+}
+
+.video-form input:focus {
+  background: rgba(17, 51, 17, .6);
+  border-color: rgba(17, 70, 17, .6);
+}
+
+#description:focus {
+  background: rgba(17, 51, 17, .6);
+  border-color: rgba(17, 70, 17, .6);
+}
+
+.form-content{
+  margin-top:2em;
+  margin-bottom: 4em;
+}
+.form-input-fields{
+  width: 28em;
+}
+
+.form-content img{
+  background-color: rgba(0, 0, 0, .3);
+  border-radius: .5em;
+  width: 27em;
+  height: 17em;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  /* background-color: rgb(255, 255, 0) */
+  /* margin-bottom: 5em; */
+}
+
+.buttons #submit, .buttons #cancel{
+  margin-left: 1em;
+  padding: .3em 2em;
+  border-radius: .5em;
+  border-style: none;
+  color: rgba(255, 255, 255, .7);
+  cursor: default;
+}
+
+#submit{
+  background: rgba(17, 150, 17, .6);
+}
+#submit:hover{
+  background: rgba(17, 120, 17, .6);
+}
+#cancel{
+  background: rgba(70, 70, 70, .6);
+}
+#cancel:hover{
+  background: rgba(50, 50, 50, .6);
+
+}
+
+#description{
+  resize: none;
+  width: 100%;
+  height: 9em;
+  text-align: left;
+  border-radius: 2em;
+  border-style: solid;
+  padding-bottom: 4em;
+  padding-left: 2em;
+  padding-top: .5em;
+  margin-bottom: 1em;
+  background: rgba(70, 70, 70, .5);
+  color: rgb(255, 255, 255);
+  transition: padding .4s, background .4s, border-color .4s;
+}
+
+/* Forms */
+.file-field{
+  border-radius: 2em;
+  border-style: solid;
+  border-width: thin;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.file-field + label{
+  border-width: thin;
+  border-color: rgba(255, 255, 255, .6);
+}
+
+.file-field:focus + label,
+.file-field + label:hover {
+  background: rgba(50, 50, 50, .6);
+  border-color: rgba(125, 125, 125, .6);
+}
+
+.file-field + label {
+	cursor: pointer;
+}
