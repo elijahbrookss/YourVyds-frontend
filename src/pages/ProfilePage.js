@@ -80,6 +80,7 @@ const ProfilePage = () => {
   const setUpImg = (e) => {
     const thisImg = e.target.files[0];
     if(thisImg){
+      console.log(thisImg)
       const reader = new FileReader();
       reader.addEventListener('load', (e) => {
         setProfileImg(e.target.result)

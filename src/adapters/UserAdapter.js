@@ -1,5 +1,8 @@
 // Variables
-const URL = "http://localhost:3001";
+import { API_ROOT } from '../apiRoots';
+
+URL = API_ROOT;
+
 const userExistsRoute = URL+"/userexists";
 const usersRoute = URL+"/users";
 const loginRoute = URL+'/login';

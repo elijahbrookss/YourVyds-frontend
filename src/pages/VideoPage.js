@@ -299,6 +299,7 @@ const VideoPage = () => {
             <div className="user-info">
               <a href={ user ? `/users/${user.id}` : null}>
                 <img
+                  alt="profile picture"
                   className="pfp"
                   src={ user ? user.profile_picture : '' }
                 />

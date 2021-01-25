@@ -1,6 +1,9 @@
+import { API_ROOT } from '../apiRoots';
+
+URL = API_ROOT;
+
 // Variables
 const headerKey = "Authorization";
-const contentType = {"Content-Type": "application/json"}
 
 // Header for JWT Authentication
 const header = {
@@ -9,7 +12,7 @@ const header = {
 }
 
 // Routes
-const URL = "http://localhost:3001";
+
 const VideosRoute = URL + '/videos';
 const CommentsRoute = URL + '/comments';
 const LikesRoute = URL + '/likes';
@@ -57,11 +60,11 @@ class VideoAdapter{
     })
   }
 
-  static UpdateVideo(videoObject){
-    return fetch(VideosRoute+`/${videoObject.id}`, {
+  static UpdateVideo(videoObject, id){
+    return fetch(VideosRoute+`/${id}`, {
       method: "PATCH",
-      headers: header,
-      body: JSON.stringify({video: videoObject})
+      headers: {  [headerKey]: localStorage.getItem("auth_key") },
+      body: videoObject
     })
   }
 

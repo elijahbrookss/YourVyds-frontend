@@ -18,6 +18,7 @@ const LibraryPage = () => {
   // Loading variables
   if(currentUser){
     savedVideos = currentUser.saved_videos;
+    console.log(savedVideos)
   }
 
   return (
@@ -35,18 +36,22 @@ const LibraryPage = () => {
       </div>
 
       <div className="saved-videos">
-        {
-          savedVideos ?
-            savedVideos.length > 0 ?
-              savedVideos.map(video => <VideoCardResult
-                  key={video.id}
-                  video={video.video}
-                />)
-              :
-              "Not enough videos"
+      {
+        savedVideos ?
+          savedVideos.length > 0 ?
+            savedVideos.map(result => {
+              console.log(result)
+              if(result.video){
+                return <VideoCardResult
+                  key={result.id}
+                  video={result.video}
+                />
+              }})
             :
-            null
-        }
+            <h4> You don't have any saved videos. </h4>
+          :
+          null
+      }
       </div>
 
     </div>

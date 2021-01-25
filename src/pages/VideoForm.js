@@ -40,6 +40,10 @@ const VideoForm = () => {
         setImg(video.thumbnail);
         setVideo(video.video);
         setDesc(video.description);
+        setPreviewImg(video.thumbnail);
+        setPreviewVid(video.video);
+        setVidName('Video Uploaded');
+        setImgName('Thumbnail Uploaded');
       })
 
     }
@@ -79,10 +83,8 @@ const VideoForm = () => {
       videoObject.append('description', desc);
       videoObject.append('thumbnail', img);
 
-      if(id){videoObject.append('id', id)}
-
       const adapterMethod = id ? VideoAdapter.UpdateVideo : VideoAdapter.CreateVideo
-      adapterMethod(videoObject)
+      adapterMethod(videoObject, parseInt(id))
       .then(response => response.json())
       .then(setRedirectUser);
 
@@ -147,7 +149,7 @@ const VideoForm = () => {
                 placeholder="Enter title of video" />
               <div className="form-content">
 
-                <img id="preview-img" src={previewImg} />
+                <img alt="preview immage" id="preview-img" src={previewImg} />
 
                 <div className="form-input-fields">
                   <Form.Field>
