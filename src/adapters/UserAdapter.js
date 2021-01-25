@@ -3,6 +3,8 @@ import { API_ROOT } from '../apiRoots';
 
 const URL = API_ROOT;
 
+console.log(process.env.NODE_ENV)
+
 const userExistsRoute = URL+"/userexists";
 const usersRoute = URL+"/users";
 const loginRoute = URL+'/login';
