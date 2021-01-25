@@ -80,29 +80,31 @@ const UserPage = () => {
   return (
     <div className="main-holder">
       <div className="banner">
-        <img src="https://www.phdmedia.com/san-francisco/wp-content/uploads/sites/47/2017/06/Banner-2.gif" id="banner-img" />
+        <img src={ currentUser ? currentUser.banner_picture : null } id="banner1-img" />
       </div>
-      <img
-        id="profile-img"
-        src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
-      />
+      <div className="profile-holder">
+        <img
+          id="profile-img1"
+          src={currentUser ? currentUser.profile_picture : null}
+        />
+      </div>
       <span className="banner-attach"></span>
 
       <h1 id="profile-name">{currentUser ? currentUser.username : "John Doe"}</h1>
 
       <div className="profile-stats">
         <div className="info">
-          <span>{subscribers ? subscribers.length : 0}</span>
+          <h4>{subscribers ? subscribers.length : 0}</h4>
           <p className="info-text" >Subscribers </p>
         </div>
         <span className="d1"></span>
         <div className="info">
-          <span> {videos ? videos.length : 0} </span>
+          <h4> {videos ? videos.length : 0} </h4>
           <p className="info-text" >Videos</p>
         </div>
         <span className="d1" ></span>
         <div className="info">
-          <span>{subscriptions ? subscriptions.length : 0}</span>
+          <h4>{subscriptions ? subscriptions.length : 0}</h4>
           <p className="info-text" >Subscriptions</p>
         </div>
       </div>

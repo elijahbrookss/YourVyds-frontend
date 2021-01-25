@@ -4,6 +4,7 @@ import UserAdapter from './adapters/UserAdapter';
 import { useDispatch } from 'react-redux';
 
 // Pages
+import LibraryPage from './pages/LibraryPage';
 import LandingPage from './pages/LandingPage';
 import LoginSignup from './pages/LoginSignup';
 import ProfilePage from './pages/ProfilePage';
@@ -47,13 +48,17 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={LandingPage} />
-          <Route exact path="/videos/new" component={VideoForm} />
-          <Route exact path="/videos/:id/edit" component={VideoForm} />
           <Route exact path="/users/:id" component={UserPage} />
           <Route exact path="/videos/:id" component={VideoPage} />
           <Route exact path="/search" component={SearchPage} />
+
           <SecludedComponent exact path="/login" component={LoginSignup} />
+
           <PrivateComponent exact path="/profile" component={ProfilePage} />
+          <PrivateComponent exact path="/library" component={LibraryPage} />
+          <PrivateComponent exact path="/video/new" component={VideoForm} />
+          <PrivateComponent exact path="/videos/:id/edit" component={VideoForm} />
+
         </Switch>
       </Router>
     </div>

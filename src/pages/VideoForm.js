@@ -3,13 +3,11 @@ import { Button, Form } from 'semantic-ui-react'
 import { useState, useEffect } from 'react';
 import { Redirect, useParams } from 'react-router';
 
-
 import VideoAdapter from '../adapters/VideoAdapter';
+import ReactPlayer from 'react-player';
 
 // Pages
 import LoadingScreen from '../pages/LoadingScreen';
-
-
 
 const VideoForm = () => {
 
@@ -20,14 +18,15 @@ const VideoForm = () => {
   const [desc, setDesc] = useState('');
   const [errors, setErrors] = useState(null);
   const [redirectUser, setRedirectUser] = useState(false);
-  const [previewImg, setPreviewImg] = useState('https://journavel.com/wp-content/uploads/2014/11/img-placeholder-dark.jpg');
   const [loading, setLoadingScreen] = useState(false);
+
+  const [previewImg, setPreviewImg] = useState('https://journavel.com/wp-content/uploads/2014/11/img-placeholder-dark.jpg');
+  const [previewVid, setPreviewVid] = useState(null);
+
+  const [showFormContent, setShowFormContent] = useState(true);
 
   const [vidName, setVidName] = useState('Upload Video');
   const [imgName, setImgName] = useState('Upload Thumbnail');
-
-
-
 
   const { id } = useParams();
   // Methods
@@ -55,11 +54,14 @@ const VideoForm = () => {
       reader.readAsDataURL(thisImg);
       setImg(thisImg)
       setImgName(thisImg.name)
+    }else{
+      setImgName("Upload Thumbnail");
+      setImg(null);
+      setPreviewImg('https://journavel.com/wp-content/uploads/2014/11/img-placeholder-dark.jpg')
     }
   }
 
   const formSubmit = () => {
-    setLoadingScreen(true);
     let errorStates = [];
     if(name===''){ errorStates = [...errorStates, 'name'] }
     if(!img){ errorStates = [...errorStates, 'img'] }
@@ -68,6 +70,7 @@ const VideoForm = () => {
 
     if(errorStates.length === 0){ //There aren't any errors
       setErrors(null); setName(''); setImg(''); setVideo(''); setDesc(''); //Resetting the form
+      setLoadingScreen(true);
 
       const videoObject = new FormData();
 
@@ -98,6 +101,21 @@ const VideoForm = () => {
     }
   }
 
+  const setUpVid = e => {
+    const thisVid = e.target.files[0];
+    if(thisVid){
+      const reader = new FileReader();
+      reader.addEventListener('load', (e) => setPreviewVid(e.target.result));
+      reader.readAsDataURL(thisVid);
+      setVideo(thisVid)
+      setVidName(thisVid.name)
+    }else{
+      setVidName("Upload Video");
+      setVideo(null);
+      setPreviewVid(null);
+    }
+  }
+
 
   return (
     <>
@@ -105,51 +123,91 @@ const VideoForm = () => {
     { loading ? <LoadingScreen /> :
 
       <div className="video-form">
-        <Form onSubmit={formSubmit} >
-          <h3> Create a new video </h3>
-          <input
-            style={isInvalid('name')}
-            className="title-stuff"
-            onChange={e => setName(e.target.value)}
-            value={name}
-            placeholder="Enter title of video" />
-          <div className="form-content">
-
-            <img id="preview-img" src={previewImg} />
-
-            <div className="form-input-fields">
-              <Form.Field>
-                <input
-                  id='img'
-                  className="file-field img-field"
-                  type='file'
-                  onChange={ setUpImg }/>
-                <label
-                  style={isInvalid('img')}
-                  for='img'> {imgName} </label>
-                <input
-                  className="file-field video-field"
-                  type='file'
-                  id='vid'
-                  onChange={e => {setVideo(e.target.files[0]); setVidName(e.target.files[0].name)}}/>
-                <label
-                  style={isInvalid('video')}
-                  for='vid'> {vidName} </label>
-                <textarea
-                  style={isInvalid('desc')}
-                  value={desc}
-                  onChange={e => setDesc(e.target.value)}
-                  id="description"
-                  placeholder="Enter description"/>
-              </Form.Field>
+        {
+          showFormContent ?
+            <>
+            <div
+              className="preview-video"
+            >
+              {
+                video ?
+                <span onClick={() => setShowFormContent(false)}
+                  > Preview video <i className="fas fa-arrow-right" /> </span>
+                :
+                null
+              }
             </div>
-          </div>
+            <Form onSubmit={formSubmit} >
+              <h3> Create a new video </h3>
+              <input
+                style={isInvalid('name')}
+                className="title-stuff"
+                onChange={e => setName(e.target.value)}
+                value={name}
+                placeholder="Enter title of video" />
+              <div className="form-content">
 
-          <div className="buttons">
-            <button id="submit">Submit</button>
-            <a id='cancel' href="/profile">Cancel</a>
+                <img id="preview-img" src={previewImg} />
+
+                <div className="form-input-fields">
+                  <Form.Field>
+                    <input
+                      id='img'
+                      className="file-field img-field"
+                      type='file'
+                      onChange={ setUpImg }/>
+                    <label
+                      style={isInvalid('img')}
+                      for='img'> {imgName} </label>
+                    <input
+                      className="file-field video-field"
+                      type='file'
+                      id='vid'
+                      onChange={ setUpVid }/>
+                    <label
+                      style={isInvalid('video')}
+                      for='vid'> {vidName} </label>
+                    <textarea
+                      style={isInvalid('desc')}
+                      value={desc}
+                      onChange={e => setDesc(e.target.value)}
+                      id="description"
+                      placeholder="Enter description"/>
+                  </Form.Field>
+                </div>
+              </div>
+
+              <div className="buttons">
+                <button id="submit">Submit</button>
+                <a id='cancel' href="/profile">Cancel</a>
+              </div>
+            </Form>
+          </>
+          :
+          <>
+          <div
+            className="preview-video1"
+          >
+            {
+              video ?
+              <span onClick={() => setShowFormContent(true)} >
+                <i className="fas fa-arrow-left" /> Go back </span>
+              :
+              null
+            }
           </div>
-        </Form>
+          <div className="preview-vid-holder">
+            <ReactPlayer
+              width={"100%"}
+              height={"500px"}
+              playing
+              pip
+              controls
+              url={ previewVid }
+            />
+          </div>
+          </>
+        }
       </div>
 
      }

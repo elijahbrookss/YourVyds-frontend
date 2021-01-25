@@ -4,12 +4,16 @@ import { useSelector } from 'react-redux';
 
 const PrivateComponent = ({component: Component, ...rest}) => {
 
-  const currentUser = useSelector(state => state.userState.currentUser);
-
+  const currentUser = localStorage.getItem("auth_key");
   return (
     <Route
       {...rest}
-      render={props => currentUser ? <Component {...props} /> : <Redirect to = "/login" /> }
+      render={
+        props => currentUser && currentUser!=='null' ?
+        <Component {...props} />
+        :
+        <Redirect to = "/login" />
+      }
       />
   );
 }

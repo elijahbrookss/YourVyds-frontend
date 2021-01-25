@@ -16,6 +16,7 @@ const LikesRoute = URL + '/likes';
 const DislikeRoute = URL + '/dislikes';
 const SubscriptionRoute = URL + '/subscriptions';
 const UnSubscribeRoute = URL + '/subscriptions_remove';
+const SavedVideoRoute = URL + '/saved_videos';
 
 class VideoAdapter{
   static GetVideo(videoId){
@@ -107,6 +108,21 @@ class VideoAdapter{
       method: "POST",
       headers: header,
       body: JSON.stringify({subscription: subscriptionObj})
+    })
+  }
+
+  static SaveVideo(savedVideoObj){
+    return fetch(SavedVideoRoute, {
+      method: "POST",
+      headers: header,
+      body: JSON.stringify({saved_video: savedVideoObj})
+    })
+  }
+
+  static unSaveVideo(savedVidId){
+    return fetch(SavedVideoRoute+`/${savedVidId}`, {
+      method: "DELETE",
+      headers: header,
     })
   }
 

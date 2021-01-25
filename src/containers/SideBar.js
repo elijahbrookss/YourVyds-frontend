@@ -8,10 +8,9 @@ const SideBar = () => {
   const dispatch = useDispatch();
 
   const logout = () => {
-    UserAdapter.LogoutUser();
+    UserAdapter.LogoutUser()
     dispatch({type: 'SET_USER', currentUser: null});
     dispatch({type: "SET_SUB_INFO", subInfo: null});
-
   }
 
   return (
@@ -23,18 +22,23 @@ const SideBar = () => {
             <i className="fas fa-home"></i>
           </a>
           <a
-            href="/videos"
+            href="/library"
             className="sidebar-button"
           ><i className="fa fa-film"></i></a>
           <a
-            id="logout"
-            onClick={logout}
-            className="sidebar-button"
-          ><i className="fas fa-sign-out-alt"></i></a>
-          <a
-            href="/videos/new"
+            href="/video/new"
             className="sidebar-button"
           ><i className="fas fa-video"></i></a>
+          <a
+            href="/search"
+            className="sidebar-button"
+          ><i className="fas fa-search"></i></a>
+          <a
+            id="logout"
+            onClick={logout}
+            href={document.URL}
+            className="sidebar-button"
+          ><i className="fas fa-sign-out-alt"></i></a>
         </>
         :
         <>
@@ -44,16 +48,17 @@ const SideBar = () => {
             <i className="fas fa-home"></i>
           </a>
           <a
+            href="/search"
+            className="sidebar-button"
+          ><i className="fas fa-search"></i></a>
+          <a
             href="/login"
             className="sidebar-button">
             <i className="fas fa-sign-in-alt"></i>
           </a>
         </>
       }
-      <a
-        href="/search"
-        className="sidebar-button"
-      ><i className="fas fa-search"></i></a>
+
     </div>
   )
 }

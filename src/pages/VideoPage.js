@@ -25,6 +25,7 @@ const VideoPage = () => {
   const [currentVideo, setCurrentVideo] = useState(null);
   const [videoLiked, setVideoLiked] = useState(false);
   const [videoDisliked, setVideoDisliked] = useState(false);
+  const [videoSaved, setVideoSaved] = useState(false);
   const [subscriptionInfo, setSubscriptionInfo] = useState(null);
   const [refresh, setRefresh] = useState(null);
 
@@ -40,6 +41,9 @@ const VideoPage = () => {
     });
     currentUser.dislikes.forEach(dislike => {
       if(dislike.video_id === videoObject.id){setVideoDisliked(true)}
+    });
+    currentUser.saved_videos.forEach(savedVid => {
+      if(savedVid.video_id === videoObject.id){setVideoSaved(true)}
     });
   }
 
@@ -154,7 +158,8 @@ const VideoPage = () => {
   }
 
   const likeVideo = () => {
-    if(videoLiked || !currentUser){ unlikeVideo(currentVideo); return }
+    if(!currentUser){return}
+    if(videoLiked ){ unlikeVideo(currentVideo); return }
     const likeObject = {
       user_id: currentUser.id,
       video_id: currentVideo.id
@@ -172,6 +177,7 @@ const VideoPage = () => {
   }
 
   const dislikeVideo = () => {
+    if(!currentUser){return}
     if(videoDisliked || !currentUser){ undislikeVideo(currentVideo); return }
 
     const dislikeObject = {
@@ -188,6 +194,45 @@ const VideoPage = () => {
       setVideoDisliked(true);
       unlikeVideo(newVideo);
     })
+  }
+
+  const saveVideo = video => {
+    const savedVideoObj = {
+      user_id: currentUser.id,
+      video_id: currentVideo.id
+    }
+
+    VideoAdapter.SaveVideo(savedVideoObj)
+    .then(response => response.json())
+    .then(json => {
+      const newUser = { ...currentUser };
+      newUser.saved_videos = [...newUser.saved_videos, json];
+      dispatch({ type: "SET_USER", currentUser: newUser});
+      setVideoSaved(true);
+    })
+  }
+
+  const unsaveVideo = video => {
+    const savedVid = currentUser.saved_videos.find(savedVid => savedVid.video_id === currentVideo.id)
+
+    VideoAdapter.unSaveVideo(savedVid.id)
+    .then(() => {
+      const newUser = { ...currentUser }
+      newUser.saved_videos = newUser.saved_videos.filter(v => v.id !== savedVid.id)
+      dispatch({ type: "SET_USER", currentUser: newUser})
+      setVideoSaved(false);
+    })
+  }
+
+  const handleSave = () => {
+    if( !currentUser ){ return }
+
+    if(videoSaved){
+      unsaveVideo(currentVideo)
+    }else {
+      saveVideo(currentVideo)
+    }
+
   }
 
   if(currentVideo){
@@ -237,8 +282,12 @@ const VideoPage = () => {
               </i>
             </div>
             <div>
-              <i className="fas fa-plus"></i>
-              <i className="fas fa-stream"> SAVE </i>
+              <i className={ videoSaved ? null : "fas fa-plus"}></i>
+              <i
+                style={ videoSaved ? {color: "rgb(0, 200, 0)"} : null }
+                className= { videoSaved ? "fas fa-check" : "fas fa-stream" }
+                onClick={ handleSave }
+                >|{ videoSaved ? "SAVED" : "SAVE" } </i>
             </div>
           </div>
         </div>

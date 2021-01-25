@@ -89,8 +89,6 @@ const ProfilePage = () => {
         userObject.append('id', currentUser.id);
         userObject.append('profile_picture', thisImg);
         UserAdapter.UpdateUser(userObject, currentUser.id)
-        .then(response => response.json())
-        .then(console.log)
       });
       reader.readAsDataURL(thisImg);
 
@@ -108,8 +106,6 @@ const ProfilePage = () => {
           userObject.append('id', currentUser.id);
           userObject.append('banner_picture', thisImg);
           UserAdapter.UpdateUser(userObject, currentUser.id)
-          .then(response => response.json())
-          .then(console.log)
         });
         reader.readAsDataURL(thisImg);
 
@@ -143,7 +139,7 @@ const ProfilePage = () => {
       </label>
       <span className="banner-attach"></span>
 
-      <h1 id="profile-name">{currentUser ? currentUser.username : "John Doe"}</h1>
+      <h1 id="profile-name">{currentUser ? currentUser.username : null}</h1>
 
       <div className="profile-stats">
         <div className="info">
@@ -162,7 +158,7 @@ const ProfilePage = () => {
         </div>
       </div>
       <a
-        href="/videos/new"
+        href="/video/new"
         className="sidebar-button1"
       ><i className="fas fa-video"> New Video </i></a>
       <div className="content-holder">

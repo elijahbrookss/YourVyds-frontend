@@ -11,10 +11,14 @@
 }
 
 .login-page-holder img{
-  width: 10em;
-  height: 10em;
-  margin-bottom: 4em;
+  width: 12em;
+  height: 12em;
+  object-fit: cover;
   border-radius: 50%;
+  border-width: .5em;
+  border-style: solid;
+  border-color: rgb(80,80,80);
+  margin-bottom: 4em;
   background-color: rgb(120, 120, 120);
 }
 
