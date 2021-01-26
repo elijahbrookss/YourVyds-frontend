@@ -10,7 +10,7 @@ const ProfilePage = () => {
   const [videos, setVideos] = useState([]);
   const [trendingVideos, setTrendingVideos] = useState(null);
   const [subscriptionVideos, setSubscriptionVideos] = useState(null);
-  const [profileImg, setProfileImg] = useState('https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png')
+  const [profileImg, setProfileImg] = useState('https://res.cloudinary.com/dxftl1qzu/image/upload/v1611617383/default_image_wqbtcu.png')
   const [ bannerImg, setBannerImg ] = useState('https://www.acurax.com/wp-content/themes/acuraxsite/images/inner_page_bnr.jpg?x67877');
 
   const dispatch = useDispatch();
@@ -78,9 +78,9 @@ const ProfilePage = () => {
   }
 
   const setUpImg = (e) => {
+    if(!currentUser){ return }
     const thisImg = e.target.files[0];
     if(thisImg){
-      console.log(thisImg)
       const reader = new FileReader();
       reader.addEventListener('load', (e) => {
         setProfileImg(e.target.result)
@@ -97,6 +97,7 @@ const ProfilePage = () => {
   }
 
     const setUpBanner = (e) => {
+      if(!currentUser){ return }
       const thisImg = e.target.files[0];
       if(thisImg){
         const reader = new FileReader();

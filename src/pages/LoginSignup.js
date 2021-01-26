@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Redirect } from "react-router-dom";
 
-const defaultImg = "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+const defaultImg = "https://res.cloudinary.com/dxftl1qzu/image/upload/v1611617383/default_image_wqbtcu.png"
 
 const LoginSignup = () => {
 

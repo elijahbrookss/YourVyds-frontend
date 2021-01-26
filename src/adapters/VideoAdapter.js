@@ -1,6 +1,6 @@
 import { API_ROOT } from '../apiRoots';
 
-URL = API_ROOT;
+const URL = API_ROOT;
 
 // Variables
 const headerKey = "Authorization";
