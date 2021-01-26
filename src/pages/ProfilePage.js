@@ -119,6 +119,7 @@ const ProfilePage = () => {
     <div className="main-holder">
       <div className="banner">
         <input
+          accept='.jpg, .png, .jpeg, .gif'
           id='banner-img-field'
           type='file'
           className="f1le-field"
@@ -129,6 +130,7 @@ const ProfilePage = () => {
         </label>
       </div>
       <input
+        accept='.jpg, .png, .jpeg, .gif'
         id='profile-img-field'
         className="f1le-field"
         type='file'
@@ -136,6 +138,7 @@ const ProfilePage = () => {
       />
       <label for='profile-img-field' id='profile-img'>
         <img
+          alt="profile img"
           src={profileImg}
         />
       </label>

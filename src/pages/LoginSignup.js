@@ -107,7 +107,6 @@ const LoginSignup = () => {
         <Form onSubmit={submitForm}>
           {mode ? <h3 id="username"> {username} </h3> : null }
           <Form.Field>
-
             <input
               style={mode ? renderIncorrect ? incorrectStyle : null : null}
               onChange={e => method(e.target.value)}

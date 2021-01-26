@@ -53,6 +53,7 @@ const VideoForm = () => {
   const setUpImg = (e) => {
     const thisImg = e.target.files[0];
     if(thisImg){
+      thisImg.name.toLowerCase();
       const reader = new FileReader();
       reader.addEventListener('load', (e) => setPreviewImg(e.target.result));
       reader.readAsDataURL(thisImg);
@@ -154,6 +155,7 @@ const VideoForm = () => {
                 <div className="form-input-fields">
                   <Form.Field>
                     <input
+                      accept='.jpg, .png, .jpeg, .gif'
                       id='img'
                       className="file-field img-field"
                       type='file'
@@ -162,6 +164,7 @@ const VideoForm = () => {
                       style={isInvalid('img')}
                       for='img'> {imgName} </label>
                     <input
+                      accept='.mov, .mp4'
                       className="file-field video-field"
                       type='file'
                       id='vid'
