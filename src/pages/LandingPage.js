@@ -12,7 +12,7 @@ const LandingPage = () => {
       <div className="bg-img">
         <div className="main-text">
           <h1> YourVyds </h1>
-          <h5> Streaming app for developers </h5>
+          <h5> Steaming app with little restrictions </h5>
           {
             userState.currentUser ?
             null :

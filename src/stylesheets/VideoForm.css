@@ -100,10 +100,15 @@
 
 .buttons {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  /* justify-content: flex-end; */
 }
 
-.buttons #submit, .buttons #cancel{
+.buttons #submit, #cancel{
+  text-align: center;
+  align-items: center;
   margin-left: 1em;
   padding: .3em 2em;
   border-radius: .5em;
@@ -123,7 +128,11 @@
 }
 #cancel:hover{
   background: rgba(50, 50, 50, .6);
+}
 
+.options-holder {
+  display: flex;
+  justify-content: space-between;
 }
 
 #description{

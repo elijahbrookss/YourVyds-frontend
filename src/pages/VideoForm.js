@@ -50,6 +50,22 @@ const VideoForm = () => {
 
   }, [])
 
+  const setUpVid = e => {
+    const thisVid = e.target.files[0];
+    if(thisVid){
+      const reader = new FileReader();
+      reader.addEventListener('load', (e) => setPreviewVid(e.target.result));
+      reader.readAsDataURL(thisVid);
+      setVideo(thisVid);
+      setVidName(thisVid.name);
+      filterError('video');
+    }else{
+      setVidName("Upload Video");
+      setVideo(null);
+      setPreviewVid(null);
+    }
+  }
+
   const setUpImg = (e) => {
     const thisImg = e.target.files[0];
     if(thisImg){
@@ -57,8 +73,9 @@ const VideoForm = () => {
       const reader = new FileReader();
       reader.addEventListener('load', (e) => setPreviewImg(e.target.result));
       reader.readAsDataURL(thisImg);
-      setImg(thisImg)
+      setImg(thisImg);
       setImgName(thisImg.name)
+      filterError('img');
     }else{
       setImgName("Upload Thumbnail");
       setImg(null);
@@ -87,7 +104,15 @@ const VideoForm = () => {
       const adapterMethod = id ? VideoAdapter.UpdateVideo : VideoAdapter.CreateVideo
       adapterMethod(videoObject, parseInt(id))
       .then(response => response.json())
-      .then(setRedirectUser);
+      .then(f => {
+        if(f.error){
+          setErrors(['img', 'video']);
+          setLoadingScreen(false);
+          console.log(f);
+         }
+        else{ setRedirectUser(f) }
+      })
+      .catch(setErrors);
 
     }else{
       setErrors(errorStates);
@@ -104,18 +129,9 @@ const VideoForm = () => {
     }
   }
 
-  const setUpVid = e => {
-    const thisVid = e.target.files[0];
-    if(thisVid){
-      const reader = new FileReader();
-      reader.addEventListener('load', (e) => setPreviewVid(e.target.result));
-      reader.readAsDataURL(thisVid);
-      setVideo(thisVid)
-      setVidName(thisVid.name)
-    }else{
-      setVidName("Upload Video");
-      setVideo(null);
-      setPreviewVid(null);
+  const filterError = (errorName) => {
+    if(errors && errors.includes(errorName)){
+      setErrors(errors.filter( error => error !== errorName))
     }
   }
 
@@ -145,7 +161,7 @@ const VideoForm = () => {
               <input
                 style={isInvalid('name')}
                 className="title-stuff"
-                onChange={e => setName(e.target.value)}
+                onChange={e => {setName(e.target.value); filterError('name')}}
                 value={name}
                 placeholder="Enter title of video" />
               <div className="form-content">
@@ -175,17 +191,36 @@ const VideoForm = () => {
                     <textarea
                       style={isInvalid('desc')}
                       value={desc}
-                      onChange={e => setDesc(e.target.value)}
+                      onChange={e => {setDesc(e.target.value); filterError('desc')} }
                       id="description"
                       placeholder="Enter description"/>
                   </Form.Field>
                 </div>
               </div>
 
-              <div className="buttons">
-                <button id="submit">Submit</button>
-                <a id='cancel' href="/profile">Cancel</a>
+              <div className="options-holder">
+                <h5
+                  id="didntwork"
+                  style={ errors ? {color: "rgb(150, 0, 0)"} :
+                  name && video && img && desc ?
+                   {color: 'rgb(0, 150, 0)'}
+                  :
+                   {color: 'rgb(150, 150, 150)'} }
+                > {
+                  errors ?
+                   "There was an issue uploading the video."
+                   :
+                    name && video && img && desc ?
+                      "Looking all good!"
+                      :
+                      "Please fill out all options."
+                } </h5>
+                <div className="buttons">
+                  <button id="submit">Submit</button>
+                  <a id='cancel' href="/profile">Cancel</a>
+                </div>
               </div>
+
             </Form>
           </>
           :
