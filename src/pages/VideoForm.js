@@ -108,11 +108,10 @@ const VideoForm = () => {
         if(f.error){
           setErrors(['img', 'video']);
           setLoadingScreen(false);
-          console.log(f);
          }
         else{ setRedirectUser(f) }
       })
-      .catch(setErrors);
+      .catch(error => {setErrors(['img', 'video']); setLoadingScreen(false)});
 
     }else{
       setErrors(errorStates);
