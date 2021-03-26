@@ -35,7 +35,6 @@ function App() {
         if(!data.message){dispatch({type: "SET_USER", currentUser: data})}
       })
 
-      // I know this is messy, get off my case, I coded this at 3am.
       UserAdapter.GetSubscriptionInfo()
       .then(response => response.json())
       .then(subInfo => dispatch({type: "SET_SUB_INFO", subInfo}))
